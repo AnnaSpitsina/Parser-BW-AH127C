@@ -10,7 +10,7 @@
 //класс протокола
 #pragma pack(push,1)
 //заглушка для заголовка послыки
-struct Header {
+struct Header_AH {
     uint8_t identif = 0x77;
     uint8_t lenght = 0x38;
     uint8_t adress = 0x00;
@@ -18,7 +18,7 @@ struct Header {
 };
 //структура, которая приходит от датчика
 struct DataFromAH127C {
-    Header header;
+    Header_AH header;
 
     float yaw;
     float pitch=0;
