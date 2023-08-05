@@ -184,6 +184,7 @@ void AH127Cprotocol::parseBuffer() {
         msg.second_qvat = FourBytesToFloatQvat(tmp.mid(44, 4));
         msg.third_qvat = FourBytesToFloatQvat(tmp.mid(48, 4));
         msg.four_qvat = FourBytesToFloatQvat(tmp.mid(52, 4));
+        data = msg;
        //PrintMsg(msg);
         m_buffer.remove(0, index+57);
     }
