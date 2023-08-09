@@ -168,9 +168,9 @@ void AH127Cprotocol::parseBuffer() {
         DataFromAH127C msg;
         auto tmp = m_buffer.mid(index, 57);
 
-        msg.yaw = ThreeBytesToFloat(tmp.mid(4,3));
-        msg.pitch = ThreeBytesToFloat(tmp.mid(7, 3));
-        msg.roll = ThreeBytesToFloat(tmp.mid(10, 3));
+        msg.pitch = ThreeBytesToFloat(tmp.mid(4,3));
+        msg.roll = ThreeBytesToFloat(tmp.mid(7, 3));
+        msg.yaw = ThreeBytesToFloat(tmp.mid(10, 3));
         msg.X_accel = ThreeBytesToFloatAccel(tmp.mid(13, 3));
         msg.Y_accel = ThreeBytesToFloatAccel(tmp.mid(16, 3));
         msg.Z_accel = ThreeBytesToFloatAccel(tmp.mid(19, 3));
