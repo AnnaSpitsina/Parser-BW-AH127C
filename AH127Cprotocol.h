@@ -57,10 +57,11 @@ protected:
     unsigned short calculateCRC(unsigned char data[], unsigned int length);
     void parseBuffer();
     QByteArray m_buffer;
-    QSerialPort m_port; //объект COM-порта
     int baudRate = 115200; //бодрейт
     QTime time;
     QTimer *timer;
+public:
+    QSerialPort m_port; //объект COM-порта
 };
 
 #endif // AH127CPROTOCOL_H
