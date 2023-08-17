@@ -154,6 +154,28 @@ void AH127Cprotocol::parseBuffer() {
     if (m_buffer.size() <= 4 ) {
         return;
     }
+    QByteArray header_calibration_start((char*) &(calibr_start),sizeof(Header_AH_calibration_start));
+    int index_calibr_start = m_buffer.indexOf(header_calibration_start);
+    if (index_calibr_start == -1) {
+        qDebug() << "команда начала калибровки не распознана";
+        return;
+    } else {
+        flag_calibration_start = true;
+        flag_calibration_end = false;
+        qDebug() << "команда калибровки дошла до датчика, можно начинать калибровку";
+    }
+
+    QByteArray header_calibration_end((char*) &(calibr_end),sizeof(Header_AH_calibration_end));
+    int index_calibr_end = m_buffer.indexOf(header_calibration_end);
+    if (index_calibr_end == -1) {
+        qDebug() << "команда окончания калибровки не распознана";
+        return;
+    } else {
+        flag_calibration_start = false;
+        flag_calibration_end = true;
+        qDebug() << "команда окончания калибровки дошла до датчика, результат калибровки записан";
+    }
+
     QByteArray header((char*) &(data.header),sizeof(Header_AH));
     int index = m_buffer.indexOf(header);
     if (index == -1) {

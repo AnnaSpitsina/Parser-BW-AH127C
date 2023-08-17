@@ -9,7 +9,7 @@
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    AH127Cprotocol protocol ("COM7");
+    AH127Cprotocol protocol ("COM8");
 
     return a.exec();
 }

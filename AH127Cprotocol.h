@@ -38,6 +38,26 @@ struct DataFromAH127C {
     float four_qvat=0;
     float crc;
 };
+
+//заглушка для ответа от команды начала калибровки
+struct Header_AH_calibration_start {
+    uint8_t identif = 0x77;
+    uint8_t lenght = 0x05;
+    uint8_t adress = 0x00;
+    uint8_t command = 0x91;
+    uint8_t datafield = 0x00;
+    uint8_t checksum = 0x96;
+};
+
+//заглушка для ответа от команды начала калибровки
+struct Header_AH_calibration_end {
+    uint8_t identif = 0x77;
+    uint8_t lenght = 0x05;
+    uint8_t adress = 0x00;
+    uint8_t command = 0x92;
+    uint8_t datafield = 0x00;
+    uint8_t checksum = 0x97;
+};
 #pragma pack(pop)
 
 class AH127Cprotocol : public QObject
@@ -46,6 +66,10 @@ class AH127Cprotocol : public QObject
 public:
     explicit AH127Cprotocol(QString portName, int baudRate = 115200, QObject *parent = 0);
     DataFromAH127C data;//выходная структура
+    Header_AH_calibration_start calibr_start;
+    Header_AH_calibration_end calibr_end;
+    bool flag_calibration_start = false;
+    bool flag_calibration_end = false;
 
     bool correctChecksum (QByteArray const &ba);//это метод, который проверяет корректность чексуммы
 public slots:
