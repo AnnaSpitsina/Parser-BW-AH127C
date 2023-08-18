@@ -160,8 +160,8 @@ void AH127Cprotocol::parseBuffer() {
         qDebug() << "команда начала калибровки не распознана";
         return;
     } else {
-        flag_calibration_start = true;
-        flag_calibration_end = false;
+        flag_calibration_start = 1;
+        flag_calibration_end = 0;
         qDebug() << "команда калибровки дошла до датчика, можно начинать калибровку";
     }
 
@@ -171,8 +171,8 @@ void AH127Cprotocol::parseBuffer() {
         qDebug() << "команда окончания калибровки не распознана";
         return;
     } else {
-        flag_calibration_start = false;
-        flag_calibration_end = true;
+        flag_calibration_start = 0;
+        flag_calibration_end = 1;
         qDebug() << "команда окончания калибровки дошла до датчика, результат калибровки записан";
     }
 

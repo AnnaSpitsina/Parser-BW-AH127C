@@ -68,8 +68,8 @@ public:
     DataFromAH127C data;//выходная структура
     Header_AH_calibration_start calibr_start;
     Header_AH_calibration_end calibr_end;
-    bool flag_calibration_start = false;
-    bool flag_calibration_end = false;
+    qint8 flag_calibration_start = false;
+    qint8 flag_calibration_end = false;
 
     bool correctChecksum (QByteArray const &ba);//это метод, который проверяет корректность чексуммы
 public slots:
