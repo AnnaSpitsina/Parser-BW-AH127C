@@ -86,6 +86,8 @@ protected:
     QTimer *timer;
 public:
     QSerialPort m_port; //объект COM-порта
+    quint8 flag_start_cal = 0;
+    quint8 flag_finish_cal = 0;
 };
 
 #endif // AH127CPROTOCOL_H
