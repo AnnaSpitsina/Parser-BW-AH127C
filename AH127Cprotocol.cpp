@@ -174,6 +174,27 @@ void AH127Cprotocol::parseBuffer() {
         flag_calibration_start = 0;
         flag_calibration_end = 1;
         qDebug() << "команда окончания калибровки дошла до датчика, результат калибровки записан";
+        //и тогда возобоновляем посылку данных
+        char cmd_1[6]; //задание формата посылки, 2.15
+        cmd_1[0] = 0x77;
+        cmd_1[1] = 0x05;
+        cmd_1[2] = 0x00;
+        cmd_1[3] = 0x0C;
+        cmd_1[4] = 0x05;
+        cmd_1[5] = 0x16;
+        m_port.write(cmd_1, 6);
+        m_port.waitForBytesWritten();
+
+        char cmd_2[6]; //задание частоты выдачи данных, 2.17
+        cmd_2[0] = 0x77;
+        cmd_2[1] = 0x05;
+        cmd_2[2] = 0x00;
+        cmd_2[3] = 0x56;
+        cmd_2[4] = 0x05;
+        cmd_2[5] = 0x60;
+        m_port.write(cmd_2, 6);
+        m_port.waitForBytesWritten();
+
     }
 
     QByteArray header((char*) &(data.header),sizeof(Header_AH));
