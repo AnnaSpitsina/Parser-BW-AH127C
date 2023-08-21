@@ -155,7 +155,7 @@ void AH127Cprotocol::parseBuffer() {
         return;
     }
 
-    if (flag_calibration_start == 1) {
+    if (flag_start_cal == 1) {
     QByteArray header_calibration_start((char*) &(calibr_start),sizeof(Header_AH_calibration_start));
     int index_calibr_start = m_buffer.indexOf(header_calibration_start);
     if (index_calibr_start == -1) {
@@ -166,10 +166,10 @@ void AH127Cprotocol::parseBuffer() {
         flag_calibration_end = 0;
         qDebug() << "команда калибровки дошла до датчика, можно начинать калибровку";
     }
-    flag_calibration_start = 0;
+    flag_start_cal = 0;
     }
 
-    if (flag_calibration_start == 1) {
+    if (flag_finish_cal == 1) {
     QByteArray header_calibration_end((char*) &(calibr_end),sizeof(Header_AH_calibration_end));
     int index_calibr_end = m_buffer.indexOf(header_calibration_end);
     if (index_calibr_end == -1) {
@@ -201,7 +201,7 @@ void AH127Cprotocol::parseBuffer() {
         m_port.waitForBytesWritten();
 
     }
-    flag_calibration_start = 0;
+    flag_finish_cal = 0;
     }
 
     QByteArray header((char*) &(data.header),sizeof(Header_AH));
